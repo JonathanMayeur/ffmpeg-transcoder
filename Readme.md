@@ -6,9 +6,9 @@ The transcoder uses an FFmpeg dockerfile built from source. Built on Alpine Linu
 # Usage
 The ffmpeg command uses the `-filter_complex` to split the input source to 3 different sources. The `-map` option instructs ffmpeg what streams from the inputs created via the splitt filter, should be included in the outputs.
 
-The source input is set via an environment variable `${input}`. We can set the real-time buffer with the `${rtbufsize}`. The Dockerfile comes with the input test input value to test the transcoder. This can be replaced with the input you want to transcode.
+The source input is set via an environment variable `${input}`. We can set the real-time buffer with the `${rtbufsize}`. The Dockerfile comes with a test input  value to test the transcoder. This can be replaced with the input you want to transcode.
 
-The `${size}` variable allows to resize the input source. With `${preset}` we can establish the encoding speed. With a slower spectrum you get more quality at the sacrifice of time and CPU usage and quality. `${level}` specifies the encoding level. With `${bv}` and `${ba}` we specify the video and audio encoding bit rate.
+The `${size}` variable allows to resize the input source. With `${preset}` we can establish the encoding speed. With a slower spectrum you get more quality at the sacrifice of time and CPU usage and quality. `${level}` specifies the encoding level. `${bv}` and `${ba}` specifies the video and audio encoding bit rate.
 
 The `${output}` fields allow us to set the rtmp outputs.
 
@@ -46,7 +46,7 @@ ENTRYPOINT ffmpeg -rtbufsize ${rtbufsize} ${input} -filter_complex '[0:v]split=3
 ```
 
 # Build and run
-After you changed the Dockerfile in your repo, you can build and run the container from source.
+After you changed the Dockerfile in your local repository, you can build and run the container from source.
 
 ```bash
 $ docker build -t ffmpeg_transcoder .
